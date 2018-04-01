@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose'
 import {PreferencesSchema} from './preferences.schema';
+import {SocNetSchema} from './soc-net.schema';
 
 export const UserShema = new mongoose.Schema({
     name: {
@@ -13,12 +14,12 @@ export const UserShema = new mongoose.Schema({
         unique: true
     },
 
-    userIdVk: {
-        type: String
+    userInVk: {
+        type: SocNetSchema
     },
 
-    userIdFb: {
-        type: String
+    userInFb: {
+        type: SocNetSchema
     },
 
     todayAction: {  //утро день вечер ночь
