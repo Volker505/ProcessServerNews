@@ -6,7 +6,6 @@ export const databaseProviders = [
         useFactory: async () => {
             (mongoose as any).Promise = global.Promise;
             return await mongoose.connect('mongodb://localhost/newsForUsers', {
-                useMongoClient: true,
             });
         },
     },

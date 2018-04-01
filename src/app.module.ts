@@ -1,9 +1,15 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import {Module} from '@nestjs/common';
+import {ReqProcessingModule} from './modules/req-processing/req-processing.module';
+import {DatabaseModule} from './database/database.module';
+import {OauthModule} from './modules/oauth/oauth.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  components: [],
+    imports: [
+        ReqProcessingModule,
+        OauthModule,
+        DatabaseModule,
+    ],
+
 })
-export class ApplicationModule {}
+export class ApplicationModule {
+}
