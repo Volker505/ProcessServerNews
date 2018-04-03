@@ -1,11 +1,18 @@
-import {Component} from '@nestjs/common';
+import {Component, Inject} from '@nestjs/common';
 import * as fetch from 'node-fetch';
 import {DataOauth, fbId, fbSec, vkId, vkSec} from './dto/dataOauth';
+import {Model} from 'mongoose';
+import {SocNetInterface} from './interfaces/soc-net.interface';
+import {oauthModelToken, userModelToken} from '../../database/provides';
+import {UserInterface} from '../req-processing/interfaces/user.interface';
 
 
 @Component()
 export class OauthService {
-    constructor() {
+    constructor(
+        @Inject(oauthModelToken) private readonly oauthSocNet: Model<SocNetInterface>,
+        @Inject(userModelToken) private readonly user: Model<UserInterface>//todo userInterface
+    ) {
     }
 
     async linkVk(data: DataOauth) {
