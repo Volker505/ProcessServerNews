@@ -5,7 +5,7 @@ export class UserDto {
     name: string;
     idChatUser: string;
     todayAction: string;    //утро, день ...
-    userIdVk: string;   //todo fix
-    userIdFb: string;   //todo fix
+    userInVk: string;
+    userInFb: string;
     preferences: string[];
 }
