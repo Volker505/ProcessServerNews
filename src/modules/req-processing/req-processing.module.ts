@@ -2,10 +2,13 @@ import {Module} from '@nestjs/common';
 import {ReqProcessingController} from './req-processing.controller';
 import {DatabaseModule} from '../../database/database.module';
 import {reqProcessingProviders} from './req-processing.providers';
+import {ReqProcessingService} from './req-processing-service';
+import {WorkerModule} from '../worker/worker.module';
 
 @Module({
     imports: [
-        DatabaseModule
+        DatabaseModule,
+        WorkerModule
     ],
 
     controllers: [
@@ -13,6 +16,7 @@ import {reqProcessingProviders} from './req-processing.providers';
     ],
 
     components: [
+        ReqProcessingService,
         ...reqProcessingProviders
     ]
 

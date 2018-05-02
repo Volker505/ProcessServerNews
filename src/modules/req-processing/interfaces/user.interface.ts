@@ -2,6 +2,7 @@ import {SocNetSchema} from '../../../database/schems/soc-net.schema';
 import {PreferencesSchema} from '../../../database/schems/preferences.schema';
 import {SocNetInterface} from '../../oauth/interfaces/soc-net.interface';
 import {PreferencesInterface} from './preferences.interface';
+import {NewsForUserInterface} from './news-for-user.interface';
 
 
 export interface UserInterface {
@@ -15,5 +16,7 @@ export interface UserInterface {
 
     readonly todayAction: string ;  //утро день вечер ночь
 
-    readonly preferences: PreferencesInterface;
+    readonly preferences: [PreferencesInterface];
+
+    readonly allNews: [NewsForUserInterface];
 }

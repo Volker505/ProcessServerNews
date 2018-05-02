@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose'
 import {PreferencesSchema} from './preferences.schema';
 import {SocNetSchema} from './soc-net.schema';
+import {NewsForUserSchema} from './news-for-user.schema';
 
 export const UserShema = new mongoose.Schema({
     name: {
@@ -28,5 +29,10 @@ export const UserShema = new mongoose.Schema({
 
     preferences: {
         type: [PreferencesSchema]
-    }
+    },
+
+    allNews: {
+        type: [NewsForUserSchema]
+    },
+
 });

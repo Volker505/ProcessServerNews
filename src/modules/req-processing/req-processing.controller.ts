@@ -32,7 +32,7 @@ export class ReqProcessingController {
     }
 
     @Get('news-td/:userId')//сегодня или актуальные
-    async getNewsForUser(@Param() params): Promise<any> {
+    async getNewsForUser(@Param() params): Promise<any> {//userId это idchat bot
         return params.userId;
     }
 

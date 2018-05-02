@@ -3,7 +3,7 @@ import {NewsInterface} from './news.interface';
 
 
 export class NewsForUserInterface {
-    readonly userId: string; //todo возможет тип objectId
+    readonly creationDate: Date;
 
     readonly news: NewsInterface[];
 

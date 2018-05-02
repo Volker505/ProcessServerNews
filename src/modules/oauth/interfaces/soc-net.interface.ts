@@ -1,9 +1,9 @@
 
 
 export interface SocNetInterface {
-    readonly userId: string;
+    readonly userId: number;
     readonly token:  string;
-    readonly code: string;
+    readonly code?: string;
     readonly exId: string;
 }
 

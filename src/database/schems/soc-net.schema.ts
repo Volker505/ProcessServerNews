@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 
 export const SocNetSchema = new mongoose.Schema({
     userId: {
-        type: String
+        type: Number
     },
     token: {
         type: String
