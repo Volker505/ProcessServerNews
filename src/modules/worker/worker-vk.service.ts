@@ -23,7 +23,6 @@ export class WorkerVkService {
         for (let group of groups) {
             urls.push(`https://api.vk.com/method/wall.get?owner_id=-${group}&v=5.62&access_token=${token}`)
         }
-        // return urls;
-        return [];
+        return urls;
     }
 }
