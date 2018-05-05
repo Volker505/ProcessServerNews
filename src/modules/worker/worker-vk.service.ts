@@ -25,4 +25,8 @@ export class WorkerVkService {
         }
         return urls;
     }
+
+    public async getActualNew(userId: number){
+
+    }
 }
