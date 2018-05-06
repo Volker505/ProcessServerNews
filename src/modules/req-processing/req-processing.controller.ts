@@ -30,9 +30,9 @@ export class ReqProcessingController {
 
     }
 
-    @Get('actualNews_vk/:chatId')
+    @Get('actualNews_vk/:id')
     async getNewsVk(@Param() params): Promise<any> {
-        this.workerVkService
+        await this.workerVkService.getActualNew(params.id);
     }
 
 }
