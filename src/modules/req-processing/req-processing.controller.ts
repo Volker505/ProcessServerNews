@@ -7,13 +7,14 @@ import {
 } from '@nestjs/common';
 import {UserDto} from './dto/user.dto';
 import {UpdatingPortalsDto} from './dto/updatingPortals.dto';
-import {WorkerVkService} from '../worker/worker-vk.service';
+import {WorkerVkService} from '../workers/worker-vk.service';
+import {WorkerGtService} from '../workers/worker-gt.service';
 
 
 @Controller('api')
 export class ReqProcessingController {
-    constructor(private workerVkService: WorkerVkService
-    ) {}
+    constructor(private workerVkService: WorkerVkService,
+                private workerGtService: WorkerGtService) {}
 
     @Post('add-portals')
     async addNewPortal(@Body() portal: UpdatingPortalsDto): Promise<any> {
@@ -33,6 +34,11 @@ export class ReqProcessingController {
     @Get('actualNews_vk/:id')
     async getNewsVk(@Param() params): Promise<any> {
         await this.workerVkService.getActualNew(params.id);
+    }
+
+    @Get('actualNews_gt/:id')
+    async getNewsGt (@Param() params): Promise<any>{
+        await this.workerGtService.getActualNews(params.id);
     }
 
 }

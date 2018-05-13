@@ -1,12 +1,9 @@
 import {Component, Inject} from '@nestjs/common';
 import * as fetch from 'node-fetch';
-import * as request from 'request';
 import {Model} from 'mongoose';
 import {userModelToken} from '../../database/provides';
 import {UserInterface} from '../req-processing/interfaces/user.interface';
 import {WallVkDto} from './dto/wallVk.dto';
-import {async} from 'rxjs/scheduler/async';
-
 
 @Component()
 export class WorkerVkService {

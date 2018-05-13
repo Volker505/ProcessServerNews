@@ -4,7 +4,7 @@ import {OauthService} from './oauth.service';
 import {DatabaseModule} from '../../database/database.module';
 import {oauthProviders} from './oauth.providers';
 import {reqProcessingProviders} from '../req-processing/req-processing.providers';
-import {WorkerModule} from '../worker/worker.module';
+import {WorkerModule} from '../workers/worker.module';
 
 @Module({
     imports: [

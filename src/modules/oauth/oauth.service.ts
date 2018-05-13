@@ -7,7 +7,7 @@ import {oauthModelToken, preferencesModelToken, userModelToken} from '../../data
 import {UserInterface} from '../req-processing/interfaces/user.interface';
 import {DataRegistration} from './dto/dataRegistration';
 import {PreferencesInterface} from '../req-processing/interfaces/preferences.interface';
-import {WorkerVkService} from '../worker/worker-vk.service';
+import {WorkerVkService} from '../workers/worker-vk.service';
 
 
 @Component()
