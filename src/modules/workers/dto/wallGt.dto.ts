@@ -10,6 +10,10 @@ export class RecordGt {
     pubDate: string;
     content: string;    //это xml (текст и ссылки, теги итд)
 
+    contentSnippet:string;
+
     isoDate: string; //дата время 2вар
     categories: any[];
+
+    img: string;
 }

@@ -7,7 +7,7 @@ import {UserInterface} from '../req-processing/interfaces/user.interface';
 import {preferencesModelToken, userModelToken} from '../../database/provides';
 import {PreferencesInterface} from '../req-processing/interfaces/preferences.interface';
 import {WallGtDto} from './dto/wallGt.dto';
-import {ParseService} from './parse.service';
+import {Content, ParseService} from './parse.service';
 
 @Component()
 export class WorkerGtService {
@@ -52,27 +52,17 @@ export class WorkerGtService {
             return;
         }
 
+        let dataGt: WallGtDto;
+
         portalGT.urls.forEach(async item => {
-            const dataGt: WallGtDto = await this.parserRss.parseURL(item);
+            dataGt = await this.parserRss.parseURL(item);
 
-            console.log(this.parseService.parseXmlContent(dataGt.items[2].content));
-
-            // console.log(dataGt.items[1].content);
-            // const newParsRegExp = dataGt.items[1].content.split(/<.*?>/);
-
-
-
-            // xmlParser.parseString(`<>${dataGt.items[0].content}`, (err, res) => {
-            //     console.log(err);
-            // })
-
-            // dataGt.items.forEach(item => {
-            //     xmlParser.parseString(item.content, (err, res) => {console.log(err)});
-            //     // console.log(item.content);
-            // });
+            dataGt.items.forEach(item => {
+               const contentObj: Content = this.parseService.parseXmlContent(item.content);
+               item.content = contentObj.text;
+               item.img = contentObj.img;
+            });
         });
-        // const dataGt: WallGtDto = await this.parserRss.parseURL('https://geektimes.com/rss/hubs/all/');
-        // console.log(res.items.length);
 
 
     }
