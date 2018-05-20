@@ -48,7 +48,7 @@ export class WorkerVkService {
         allPost.push(...await this.requestOnPosts(groupVk));//результат первые 9х32 поста
         setTimeout(async () => {
             groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
-            allPost.push(...await this.requestOnPosts(groupVk));//результат 9х32 поста
+            allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
             this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
             //todo продолжить алгоритм
         }, 3000);
@@ -69,5 +69,10 @@ export class WorkerVkService {
             //unix time -86400
             posts.items = posts.items.filter(post => post.date >= date - 86400);
         }
+    }
+
+    private recordRating (posts: WallVkDto[]){
+
+
     }
 }

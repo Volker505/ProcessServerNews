@@ -54,18 +54,24 @@ export class WorkerGtService {
 
         let dataGt: WallGtDto;
 
-        portalGT.urls.forEach(async item => {
-            dataGt = await this.parserRss.parseURL(item);
+        for (let url of portalGT.urls){
+            dataGt = await this.parserRss.parseURL(url);
 
-            dataGt.items.forEach(item => {
-               const contentObj: Content = this.parseService.parseXmlContent(item.content);
-               item.content = contentObj.text;
-               item.img = contentObj.img;
+            dataGt.items.forEach(article => {
+                const contentObj: Content = this.parseService.parseXmlContent(article.content);
+                article.content = contentObj.text;
+                article.img = contentObj.img;
             });
-        });
 
+        }
+
+        //взаимодействие с неронной сетью
+
+
+        const index = 9;// Math.random() * (dataGt.items.length - 1);
+        console.log(Math.floor(index), dataGt.items.length);
+        console.log(dataGt.items[index+1]);//тестовое выходное значение
 
     }
-
 
 }
