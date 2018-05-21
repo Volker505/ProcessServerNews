@@ -3,7 +3,7 @@ import * as fetch from 'node-fetch';
 import {Model} from 'mongoose';
 import {userModelToken} from '../../database/provides';
 import {UserInterface} from '../req-processing/interfaces/user.interface';
-import {WallVkDto} from './dto/wallVk.dto';
+import {WallElement, WallVkDto} from './dto/wallVk.dto';
 
 @Component()
 export class WorkerVkService {
@@ -12,7 +12,6 @@ export class WorkerVkService {
     }
 
     public async getRelevantSample(userIdVk: string) {
-
     }
 
     public async getUrlGroups(userId: number, token: string): Promise<string[]> {
@@ -46,13 +45,14 @@ export class WorkerVkService {
         let groupVk = portalVk.urls.filter((item, index) => index < 9);
 
         allPost.push(...await this.requestOnPosts(groupVk));//результат первые 9х32 поста
-        setTimeout(async () => {
-            groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
-            allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
-            this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
-            //todo продолжить алгоритм
-        }, 3000);
+        await this.timeOut(3000);//todo
+        groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
+        allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
+        this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
+        //todo продолжить алгоритм
+        allPost = this.recordRating(allPost);
 
+        return
     }
 
     private async requestOnPosts(urls: string[]) {
@@ -71,8 +71,58 @@ export class WorkerVkService {
         }
     }
 
-    private recordRating (posts: WallVkDto[]){
+    private recordRating(arrWall: WallVkDto[]) {// WallVkDto[]
 
+        let currentPosts: WallElement[] = [];
 
+        for (let posts of arrWall) {
+            posts.items = this.groupRating(posts.items);
+            this.sortRecord(posts.items);
+
+            if (posts.items[0] && posts.items[1]) {// todo изменить
+                currentPosts.push(posts.items[0], posts.items[1]);
+            }
+
+            posts.items.forEach(item => console.log(item['rating']));
+            console.log('----------');
+        }
+
+        return arrWall.filter(post => {
+        });
+    }
+
+    private groupRating(wall: WallElement[]) {
+        let likes = 0;
+        let rePosts = 0;
+        let comments = 0;
+
+        wall.forEach(record => {
+            comments += record.comments.count;
+            rePosts += record.reposts.count;
+            likes += record.likes.count;
+        });
+
+        wall.forEach(record => {
+            record['rating'] = record.likes.count / (likes == 0 ? 1 : likes) + (record.reposts.count / (rePosts == 0 ? 1 : rePosts) * 5)
+                + (record.comments.count / (comments == 0 ? 1 : comments) * 10);
+        });
+
+        return wall;
+    }
+
+    private sortRecord(wall: WallElement[]) {
+        wall.sort((a, b) => {
+            if (a['rating'] < b['rating']) {
+                return 1
+            }
+            if (a['rating'] > b['rating']) {
+                return -1
+            }
+            return 0;
+        });
+    }
+
+    private timeOut(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
