@@ -50,9 +50,9 @@ export class WorkerVkService {
         allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
         this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
         //todo продолжить алгоритм
-        allPost = this.recordRating(allPost);
+        const wall = this.getWallByRating(allPost);
 
-        return
+        return wall;
     }
 
     private async requestOnPosts(urls: string[]) {
@@ -71,24 +71,20 @@ export class WorkerVkService {
         }
     }
 
-    private recordRating(arrWall: WallVkDto[]) {// WallVkDto[]
-
+    private getWallByRating(arrWall: WallVkDto[]): WallElement[] {// WallVkDto[]
         let currentPosts: WallElement[] = [];
-
         for (let posts of arrWall) {
             posts.items = this.groupRating(posts.items);
             this.sortRecord(posts.items);
 
-            if (posts.items[0] && posts.items[1]) {// todo изменить
-                currentPosts.push(posts.items[0], posts.items[1]);
-            }
-
-            posts.items.forEach(item => console.log(item['rating']));
-            console.log('----------');
+            // if (posts.items[0] && posts.items[1]) {// todo изменить
+            //     currentPosts.push(posts.items[0], posts.items[1]);
+            // }
+            currentPosts.push(...posts.items);
         }
+        this.sortRecord(currentPosts);
 
-        return arrWall.filter(post => {
-        });
+        return currentPosts
     }
 
     private groupRating(wall: WallElement[]) {
