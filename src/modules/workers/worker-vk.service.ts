@@ -4,11 +4,13 @@ import {Model} from 'mongoose';
 import {userModelToken} from '../../database/provides';
 import {UserInterface} from '../req-processing/interfaces/user.interface';
 import {WallElement, WallVkDto} from './dto/wallVk.dto';
+import {AnalysisVkRecordService} from './analysis-vk-record.service';
 
 @Component()
 export class WorkerVkService {
 
-    constructor(@Inject(userModelToken) private readonly user: Model<UserInterface>) {
+    constructor(@Inject(userModelToken) private readonly user: Model<UserInterface>,
+                private analysisVkRecordService: AnalysisVkRecordService) {
     }
 
     public async getRelevantSample(userIdVk: string) {
@@ -31,7 +33,7 @@ export class WorkerVkService {
         return urls;
     }
 
-    public async getActualNew(id: number) {
+    public async getActualNews(id: number) {
         const user = await this.user.findOne({idChatUser: id});
 
         const portalVk = await user.preferences.find(item => item.namePortal == 'vk');
@@ -45,7 +47,7 @@ export class WorkerVkService {
         let groupVk = portalVk.urls.filter((item, index) => index < 9);
 
         allPost.push(...await this.requestOnPosts(groupVk));//результат первые 9х32 поста
-        await this.timeOut(3000);//todo
+        await this.timeOut(3000);
         groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
         allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
         this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
@@ -93,6 +95,7 @@ export class WorkerVkService {
         let comments = 0;
 
         wall.forEach(record => {
+            this.analysisVkRecordService.setTypeVkRecord(record);
             comments += record.comments.count;
             rePosts += record.reposts.count;
             likes += record.likes.count;

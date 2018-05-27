@@ -22,14 +22,14 @@ export class WallElement {
     ////
 
     post_type: string; // может принимать следующие значения: post, copy, reply, postpone, suggest
-    attachments: Attachments[];
+    attachments: Attachment[];
 
     is_pinned: number;//информация о том, что запись закреплена.
     marked_as_ads: number;//содержит ли запись отметку "реклама"
 }
 
 
-export class Attachments {
+export class Attachment {
     type: string;
 
     photo?: { id: number, text: string, date: number, photo_130: string, photo_604: string };

@@ -7,6 +7,7 @@ import {reqProcessingProviders} from '../req-processing/req-processing.providers
 import {WorkerGtService} from './worker-gt.service';
 import { WorkersController } from './workers.controller';
 import {ParseService} from './parse.service';
+import {AnalysisVkRecordService} from './analysis-vk-record.service';
 
 @Module({
     imports: [DatabaseModule],
@@ -15,6 +16,7 @@ import {ParseService} from './parse.service';
         WorkerFbService,
         WorkerGtService,
         ParseService,
+        AnalysisVkRecordService,
         ...oauthProviders,
         ...reqProcessingProviders
     ],
