@@ -33,7 +33,7 @@ export class WorkerVkService {
         return urls;
     }
 
-    public async getActualNews(id: number) {
+    public async getActualNews(id: number) {// смотри алгоритм при вызове метода
         const user = await this.user.findOne({idChatUser: id});
 
         const portalVk = await user.preferences.find(item => item.namePortal == 'vk');
@@ -56,6 +56,8 @@ export class WorkerVkService {
     }
 
     private addNewsToDB (vkContetn: TypedVkContent){ //todo реализация
+        //добаление в базу данных по 8 постов каждого типа
+        //при этом записывать их все в одну схему NewsForUserSchema с типом VK
     }
 
     private async requestOnPosts(urls: string[]) {

@@ -7,5 +7,7 @@ export class NewsForUserInterface {
 
     readonly news: NewsInterface[];
 
+    readonly typePortal: string;
+
     readonly relevant: boolean;  //акутальность новостей true-пользователь не видел новости
 }

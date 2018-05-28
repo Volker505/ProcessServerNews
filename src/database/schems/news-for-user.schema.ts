@@ -8,6 +8,8 @@ export const NewsForUserSchema = new mongoose.Schema({
         default: Date.now(),
     },
 
+    typePortal: String,
+
     news: {
         type: [NewsSchema]
     },
