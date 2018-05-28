@@ -5,9 +5,11 @@ export class NewsInterface {
 
     readonly bodyNews: string;
 
-    readonly link: string;
+    readonly links: string[];
 
-    readonly photo: string;
+    readonly photos: string[];
 
     readonly created: Date;
+
+    readonly like: boolean;
 }

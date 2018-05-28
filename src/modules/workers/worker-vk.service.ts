@@ -51,7 +51,11 @@ export class WorkerVkService {
         groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
         allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
         this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
-        return this.getResObjectVk(this.getWallByRating(allPost)).gifs;
+        //todo  добавление в базу как новость
+        return this.getResObjectVk(this.getWallByRating(allPost)).links;
+    }
+
+    private addNewsToDB (vkContetn: TypedVkContent){ //todo реализация
     }
 
     private async requestOnPosts(urls: string[]) {

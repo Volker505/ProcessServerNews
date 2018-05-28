@@ -8,6 +8,7 @@ import {preferencesModelToken, userModelToken} from '../../database/provides';
 import {PreferencesInterface} from '../req-processing/interfaces/preferences.interface';
 import {WallGtDto} from './dto/wallGt.dto';
 import {Content, ParseService} from './parse.service';
+import {TypedVkContent} from './dto/wallVk.dto';
 
 @Component()
 export class WorkerGtService {
@@ -65,13 +66,16 @@ export class WorkerGtService {
 
         }
 
+        //todo добавть в базу как новость
         //взаимодействие с неронной сетью
-
 
         const index = 9;// Math.random() * (dataGt.items.length - 1);
         console.log(Math.floor(index), dataGt.items.length);
         console.log(dataGt.items[index+1]);//тестовое выходное значение
 
+    }
+
+    private addNewsToDB (vkContetn: TypedVkContent){ //todo реализация
     }
 
 }

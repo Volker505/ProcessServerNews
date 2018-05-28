@@ -10,17 +10,21 @@ export const NewsSchema = new mongoose.Schema({
         type: String,
     },
 
-    link: {
-        type: String,
-        required: true
+    links: {
+        type: [String],
     },
 
-    photo: {
-        type: String,
+    photos: {
+        type: [String],
     },
 
     created: {
         type: Date,
         default: Date.now()
-    }
+    },
+
+    like: Boolean,
+
+    relevant: {type: Boolean, default: false}
+
 });
