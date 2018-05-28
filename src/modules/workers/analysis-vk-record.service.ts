@@ -11,7 +11,7 @@ export class AnalysisVkRecordService {
 
         const attachments = record.attachments[0];
 
-        if (record.text.length > 120) {
+        if (record.text.length > 150) {
             record ['type'] = 'article';
             return;
         }

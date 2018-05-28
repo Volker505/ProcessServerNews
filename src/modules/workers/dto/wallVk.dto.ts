@@ -39,3 +39,11 @@ export class Attachment {
     note?: {id: number, title: string, text: string, date: number, view_url: string};//view_url-URL страницы для отображения заметки.
 
 }
+
+export class TypedVkContent {
+    photos: WallElement[] = [];
+    articles: WallElement[] = [];
+    gifs: WallElement[] = [];
+    links: WallElement[] = [];
+    other: WallElement[] = [];
+}

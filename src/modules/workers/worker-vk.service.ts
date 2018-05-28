@@ -3,7 +3,7 @@ import * as fetch from 'node-fetch';
 import {Model} from 'mongoose';
 import {userModelToken} from '../../database/provides';
 import {UserInterface} from '../req-processing/interfaces/user.interface';
-import {WallElement, WallVkDto} from './dto/wallVk.dto';
+import {TypedVkContent, WallElement, WallVkDto} from './dto/wallVk.dto';
 import {AnalysisVkRecordService} from './analysis-vk-record.service';
 
 @Component()
@@ -51,10 +51,7 @@ export class WorkerVkService {
         groupVk = portalVk.urls.filter((item, index) => index >= 9 && index < 18);
         allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
         this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
-        //todo продолжить алгоритм
-        const wall = this.getWallByRating(allPost);
-
-        return wall;
+        return this.getResObjectVk(this.getWallByRating(allPost)).gifs;
     }
 
     private async requestOnPosts(urls: string[]) {
@@ -119,6 +116,30 @@ export class WorkerVkService {
             }
             return 0;
         });
+    }
+
+    private getResObjectVk(wallAll: WallElement[]): TypedVkContent{
+        const content = new TypedVkContent();
+
+        for (let item of wallAll) {
+            switch (item['type']) {
+                case 'photo':
+                    content.photos.push(item);
+                    break;
+                case 'article':
+                    content.articles.push(item);
+                    break;
+                case 'gif':
+                    content.gifs.push(item);
+                    break;
+                case 'link':
+                    content.links.push(item);
+                    break;
+                default:
+                    content.other.push(item);
+            }
+        }
+        return content;
     }
 
     private timeOut(ms) {
