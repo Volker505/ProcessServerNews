@@ -25,6 +25,6 @@ export const NewsSchema = new mongoose.Schema({
 
     like: Boolean,
 
-    relevant: {type: Boolean, default: false}
+    relevant: {type: Boolean, default: true}
 
 });

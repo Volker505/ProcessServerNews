@@ -69,10 +69,10 @@ export class WorkerGtService {
         //todo добавть в базу как новость
         //взаимодействие с неронной сетью
 
-        const index = 9;// Math.random() * (dataGt.items.length - 1);
-        console.log(Math.floor(index), dataGt.items.length);
-        console.log(dataGt.items[index+1]);//тестовое выходное значение
-
+        const index = 1;// Math.random() * (dataGt.items.length - 1);
+        // console.log(Math.floor(index), dataGt.items.length);
+        // console.log(dataGt.items[index+1]);//тестовое выходное значение
+        return dataGt.items[index];
     }
 
     private addNewsToDB (vkContetn: TypedVkContent){ //todo реализация

@@ -52,7 +52,7 @@ export class WorkerVkService {
         allPost.push(...await this.requestOnPosts(groupVk));//результат 9х40 поста
         this.postFilteringPerDay(parseInt('' + Date.now() / 1000), allPost);
         //todo  добавление в базу как новость
-        return this.getResObjectVk(this.getWallByRating(allPost)).links;
+        return this.getResObjectVk(this.getWallByRating(allPost)).gifs;
     }
 
     private addNewsToDB (vkContetn: TypedVkContent){ //todo реализация
