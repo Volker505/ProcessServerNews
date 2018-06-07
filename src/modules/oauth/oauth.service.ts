@@ -22,7 +22,9 @@ export class OauthService {
     async linkVk(data: DataOauth) {
         const user = await this.user.findOne({idChatUser: data.idChat});//id чата может не быть
 
-        if (!user) { return; }// status code 401
+        if (!user) {
+            return;
+        }// status code 401
 
         let socNetInfo = await this.oauthSocNet.findOne({userId: data.dataSocNetUser.user_id});
         if (!socNetInfo) {
@@ -59,7 +61,7 @@ export class OauthService {
         try {
             await user.save(err => {
                 if (err) {
-                    console.log('err update linck soc net vk ',err);
+                    console.log('err update linck soc net vk ', err);
                     throw err;
                 }
             })
@@ -71,6 +73,10 @@ export class OauthService {
     }
 
     async linkFb(data: DataOauth) {
+
+    }
+
+    async oauth(data: { login: string, password: string }) {
 
     }
 

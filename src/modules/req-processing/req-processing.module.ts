@@ -19,7 +19,6 @@ import {WorkerModule} from '../workers/worker.module';
         ReqProcessingService,
         ...reqProcessingProviders
     ]
-
 })
 export class ReqProcessingModule {
 }

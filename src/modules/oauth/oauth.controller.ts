@@ -9,7 +9,6 @@ export class OauthController {
     constructor(private oauthService: OauthService) {
     }
 
-
     @Post('vk')
     async oauthVk(@Body() data: DataOauth): Promise<any> {
         return await this.oauthService.linkVk(data);

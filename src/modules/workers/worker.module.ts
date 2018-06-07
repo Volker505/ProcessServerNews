@@ -8,6 +8,7 @@ import {WorkerGtService} from './worker-gt.service';
 import { WorkersController } from './workers.controller';
 import {ParseService} from './parse.service';
 import {AnalysisVkRecordService} from './analysis-vk-record.service';
+import {WorkerService} from './worker.service';
 
 @Module({
     imports: [DatabaseModule],
@@ -24,6 +25,7 @@ import {AnalysisVkRecordService} from './analysis-vk-record.service';
         WorkerVkService,
         WorkerFbService,
         WorkerGtService,
+        WorkerService,
         ParseService
     ],
     controllers: [WorkersController]
